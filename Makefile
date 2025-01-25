@@ -3,7 +3,7 @@ CXX := g++
 CXXFLAGS := -Wall -Wextra -std=c++17
 
 # Source files and output
-SRCS := src/main.cpp src/leafnode.cpp src/sequencenode.cpp src/btmanager.cpp
+SRCS := src/main.cpp src/leafnode.cpp src/sequencenode.cpp src/btmanager.cpp src/fallbacknode.cpp
 OBJS := $(SRCS:.cpp=.o)
 TARGET := program
 

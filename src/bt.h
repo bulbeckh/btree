@@ -95,15 +95,14 @@ class LeafNode : public Node {
 
 };
 
-
 class SequenceNode : public Node {
 
 	public:
-		// TODO Remove MCInstance from here - it gets passed in during call to tick.
 		SequenceNode(Node** list, uint32_t n);
 
 		/*
 		*/
+		// TODO Generalise the first parameter to some sort of context that is passed in
 		NodeExecutionResult tick(MCInstance* mc, LeafNode** leafnode) override;
 
 	private:
@@ -116,6 +115,30 @@ class SequenceNode : public Node {
 		Node** nodelist;
 
 		/* @brief The number of child nodes in this sequence list. This should be known at compile time
+		*/
+		uint32_t n_nodes;
+
+};
+
+// NOTE FallbackNode is pretty much identical to SequenceNode except when checking for returns - need to rewrite to minimise code duplication
+class FallbackNode : public Node {
+	public:
+		FallbackNode(Node** list, uint32_t n);
+
+		/*
+		*/
+		NodeExecutionResult tick(MCInstance* mc, LeafNode** leafnode) override;
+		
+	private:
+		/* @brief 
+		*/
+		int idx=0;
+		
+		/* @brief
+		*/
+		Node** nodelist;
+	
+		/* @brief
 		*/
 		uint32_t n_nodes;
 

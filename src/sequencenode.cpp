@@ -1,8 +1,6 @@
 
 #include "bt.h"
 
-
-
 SequenceNode::SequenceNode(Node** list, uint32_t n) : Node(), nodelist(list), n_nodes(n) {
 #ifdef BT_DEBUG
 	std::cout << "[INIT] Sequence node at " << this << " with " << n << " nodes\n";

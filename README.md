@@ -17,7 +17,19 @@ Node that runs a callback function when ticked. Callback must return a `NodeExec
 Node that holds a list of other nodes. Will iterate through child nodes until a child node returns `NodeExecutionResult::FAILURE` or the end is reached.
 
 ### `FallbackNode`
+Like SequenceNode but will iterate until child node returns 'NodeExecutionResult::SUCCESS` or end is reached.
+
+### `ConditionNode`
 TODO
+
+### `DecoratorNode`
+TODO
+
+### `ParallelNode` (not implemented)
+**NOTE** Not implemented, despite being part of standard.
+
+
+
 
 
 

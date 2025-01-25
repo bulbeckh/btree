@@ -4,13 +4,13 @@
 #include <iostream>
 
 
-NodeExecutionResult newfunc(MCInstance* b) {
-	std::cout << "[CALL] In newfunc\n";
+NodeExecutionResult retsuc(MCInstance* b) {
+	std::cout << "[CALL] In retsec\n";
 	return NodeExecutionResult::SUCCESS;
 }
 
-NodeExecutionResult otherfunc(MCInstance* b) {
-	std::cout << "[CALL] In otherfunc\n";
+NodeExecutionResult retfai(MCInstance* b) {
+	std::cout << "[CALL] In retfai\n";
 	return NodeExecutionResult::FAILURE;
 }
 
@@ -19,15 +19,35 @@ int main(int argc, char** argv)
 
 	MCInstance g;
 
-	LeafNode a1(&newfunc);
-	LeafNode a2(&newfunc);
-	LeafNode a3(&newfunc);
+	/* Construction of the following bt
+
+	- SequenceNode (sa)
+		- LeafNode (b2)
+		- SequenceNode (sn)
+			- LeafNode (a1)
+			- LeafNode (a2)
+			- LeafNode (a3)
+		- FallbackNode (fa)
+			- LeafNode (f1)
+			- LeafNode (f2)
+	*/
+
+	LeafNode a1(&retsuc);
+	LeafNode a2(&retsuc);
+	LeafNode a3(&retsuc);
+
 	Node* lfarr[] = {&a1,&a2,&a3};
 
 	SequenceNode sn(lfarr, sizeof(lfarr)/sizeof(Node*));
 
-	LeafNode b2(&newfunc);
-	Node* uparr[] = {&b2, &sn};
+	LeafNode f1(&retfai);
+	LeafNode f2(&retsuc);
+	Node* fb_arr[] = {&f1, &f2};
+
+	FallbackNode fa(fb_arr, sizeof(fb_arr)/sizeof(Node*));
+
+	LeafNode b2(&retsuc);
+	Node* uparr[] = {&b2, &sn, &fa};
 
 	SequenceNode sa(uparr, sizeof(uparr)/sizeof(Node*));
 
