@@ -20,8 +20,7 @@ Lets call the copter object MCInstance
 - Then stores the location of this node and calls it's tick function at certain frequency - 100Hz?
 - If the node returns success, then it passes it up to the parent node
 
-
-CRTP pattern is used here to achieve compile-time polymorphism as whole BT should be known at compile time.
+CRTP pattern can be used here to achieve compile-time polymorphism as whole BT should be known at compile time.
 See 'https://en.cppreference.com/w/cpp/language/crtp'
 
 */

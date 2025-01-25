@@ -8,3 +8,18 @@ Behaviour Tree Library for AVR Microcontrollers
 ## Usage
 TODO
 
+## Node Types
+
+### `LeafNode`
+Node that runs a callback function when ticked. Callback must return a `NodeExecutionResult`.
+
+### `SequenceNode`
+Node that holds a list of other nodes. Will iterate through child nodes until a child node returns `NodeExecutionResult::FAILURE` or the end is reached.
+
+### `FallbackNode`
+TODO
+
+
+
+
+
