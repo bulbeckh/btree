@@ -1,4 +1,5 @@
-# btree - Behaviour Tree Library for AVR Microcontrollers
+# btree
+Behaviour Tree Library for AVR Microcontrollers
 
 ## \#TODO
 - [ ] Implement remaining node types (fallback, decorators)

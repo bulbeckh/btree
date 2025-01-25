@@ -123,7 +123,6 @@ class SequenceNode : public Node {
 };
 
 
-// NOTE here T is the type of the root node (sequencenode, leafnode, etc.)
 class BTManager {
 
 	public:
