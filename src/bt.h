@@ -25,9 +25,7 @@ See 'https://en.cppreference.com/w/cpp/language/crtp'
 
 */
 
-#include <cstdint>
-
-#define BT_DEBUG 1
+#include <stdint.h>
 
 #ifdef BT_DEBUG
 	#include <iostream>
