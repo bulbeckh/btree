@@ -6,9 +6,9 @@ project(btree)
 message(STATUS Using ${CMAKE_C_COMPILER})
 message(STATUS Using ${CMAKE_CXX_COMPILER})
 
-#add_compile_definitions(
-	#BT_DEBUG
-#)
+add_compile_definitions(
+	BT_DEBUG
+)
 
 ## Add BTree library
 add_library(btree STATIC 
@@ -17,3 +17,9 @@ add_library(btree STATIC
 	src/fallbacknode.cpp
 	src/sequencenode.cpp
 )
+
+add_executable(example examples/main.cpp)
+
+target_link_libraries(example btree)
+target_include_directories(example PUBLIC ./src/)
+
