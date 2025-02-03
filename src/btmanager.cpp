@@ -1,7 +1,7 @@
 
 #include "bt.h"
 
-BTManager::BTManager(MCInstance* a, Node* root) : root(root), mc(a)
+BTManager::BTManager(Node* root) : root(root)
 {
 
 }
@@ -16,7 +16,7 @@ NodeExecutionResult BTManager::run()
 	
 	// Run this in a loop - in actual execution, th
 	do {
-		result = root->tick(this->mc, lf);
+		result = root->tick(lf);
 #ifdef BT_DEBUG
 		BTManager::printResult(result);
 #endif

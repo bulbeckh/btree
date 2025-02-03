@@ -7,14 +7,14 @@ SequenceNode::SequenceNode(Node** list, uint32_t n) : Node(), nodelist(list), n_
 #endif
 }
 
-NodeExecutionResult SequenceNode::tick(MCInstance* mc, LeafNode** leafnode)
+NodeExecutionResult SequenceNode::tick(LeafNode** leafnode)
 {
 #ifdef BT_DEBUG
 	std::cout << "[CALL] Tick - SequenceNode at " << this << " with idx " << this->idx << " and n_nodes " << this->n_nodes << "\n";
 #endif
 
 	// Call to virtualised tick function for each child node
-	NodeExecutionResult result = this->nodelist[this->idx]->tick(mc, leafnode);
+	NodeExecutionResult result = this->nodelist[this->idx]->tick(leafnode);
 
 	// On FAILURE of SequenceNode, reset this node and return failure
 	if (result==NodeExecutionResult::FAILURE) {

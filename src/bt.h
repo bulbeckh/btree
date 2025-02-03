@@ -14,8 +14,6 @@ At 100Hz the following happens, the BTManager will call it's execute function wh
 	it returns SUCCESS or FAILURE then the logic to update the Behaviour tree will be handled by
 
 
-Lets call the copter object MCInstance
-
 - BTManager starts the execution and finds the correct leaf node.
 - Then stores the location of this node and calls it's tick function at certain frequency - 100Hz?
 - If the node returns success, then it passes it up to the parent node
@@ -30,11 +28,6 @@ See 'https://en.cppreference.com/w/cpp/language/crtp'
 #ifdef BT_DEBUG
 	#include <iostream>
 #endif
-
-
-class MCInstance {
-	// TODO
-};
 
 
 enum class NodeExecutionResult {
@@ -53,11 +46,10 @@ class Node {
 		Node() {};
 
 		/* @brief Base class tick method.
-		* @param mc Instance of a MinCopter object storing attitude and sensor readings.
 		* @param leafnode A pointer to the leafnode that executed during this tick.
 		* @returns result The NodeExecutionResult of this current tick.
 		*/
-		virtual NodeExecutionResult tick(MCInstance* mc, LeafNode** leafnode) = 0;
+		virtual NodeExecutionResult tick(LeafNode** leafnode) = 0;
 
 		/* @brief Get execution time information for this node
 		*/
@@ -75,21 +67,20 @@ class LeafNode : public Node {
 	public:
 
 		/* @brief LeafNode constructor.
-		* @param mc The instance of the MinCopter.
 		* @param btfunc The function to be run during the call to this LeafNode's tick.
 		*/
-		LeafNode(NodeExecutionResult (*btfunc)(MCInstance*));
+		LeafNode(NodeExecutionResult (*btfunc)(void));
 
 		/*
 		*/
-		NodeExecutionResult tick(MCInstance* mc, LeafNode** leafnode) override;
+		NodeExecutionResult tick(LeafNode** leafnode) override;
 
 	private:
 		
 		/* @brief bt_func is a function which is called during this nodes 'tick'. It takes an instance of MinCopter
 		* and returns a NodeExecutionResult
 		*/
-		NodeExecutionResult (*bt_func)(MCInstance*);
+		NodeExecutionResult (*bt_func)(void);
 
 };
 
@@ -100,8 +91,7 @@ class SequenceNode : public Node {
 
 		/*
 		*/
-		// TODO Generalise the first parameter to some sort of context that is passed in
-		NodeExecutionResult tick(MCInstance* mc, LeafNode** leafnode) override;
+		NodeExecutionResult tick(LeafNode** leafnode) override;
 
 	private:
 		/* @brief The index of the child node that we are currently executing or about to execute
@@ -125,7 +115,7 @@ class FallbackNode : public Node {
 
 		/*
 		*/
-		NodeExecutionResult tick(MCInstance* mc, LeafNode** leafnode) override;
+		NodeExecutionResult tick(LeafNode** leafnode) override;
 		
 	private:
 		/* @brief 
@@ -146,15 +136,9 @@ class FallbackNode : public Node {
 class BTManager {
 
 	public:
-		BTManager(MCInstance* a, Node* root);
+		BTManager(Node* root);
 
 		BTManager() = delete;
-
-
-		/* @brief 
-		*/
-		MCInstance* mc;
-
 
 		/* @brief root stores the whole tree structure
 		*/

@@ -7,14 +7,14 @@ FallbackNode::FallbackNode(Node** list, uint32_t n) : Node(), nodelist(list), n_
 #endif
 }
 
-NodeExecutionResult FallbackNode::tick(MCInstance* mc, LeafNode** leafnode)
+NodeExecutionResult FallbackNode::tick(LeafNode** leafnode)
 {
 #ifdef BT_DEBUG
 	std::cout << "[CALL] Tick - Fallback node at " << this << " with idx " << this->idx << " and n_nodes " << this->n_nodes << "\n";
 #endif
 
 	// Call to virtualised tick function for each child node
-	NodeExecutionResult result = this->nodelist[this->idx]->tick(mc, leafnode);
+	NodeExecutionResult result = this->nodelist[this->idx]->tick(leafnode);
 
 	// On FAILURE of FallbackNode, move to next node or return failure
 	if (result==NodeExecutionResult::FAILURE) {
