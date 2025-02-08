@@ -1,7 +1,7 @@
 
 #include "bt.h"
 
-#ifdef BT_DEGUG
+#ifdef BT_DEBUG
 	#include <iostream>
 #endif
 
@@ -19,12 +19,16 @@
 #define FALLBACK(name, numelements, ...) FallbackNode name((Node*[]){__VA_ARGS__}, numelements)
 
 NodeExecutionResult retsuc(MCInstance* b) {
+#ifdef BT_DEBUG
 	std::cout << "[CALL] In retsec\n";
+#endif
 	return NodeExecutionResult::SUCCESS;
 }
 
 NodeExecutionResult retfai(MCInstance* b) {
+#ifdef BT_DEBUG
 	std::cout << "[CALL] In retfai\n";
+#endif
 	return NodeExecutionResult::FAILURE;
 }
 
@@ -91,7 +95,9 @@ int main(int argc, char** argv)
 
 	manager.run();
 
+#ifdef BT_DEBUG
 	std::cout << "Finished\n";
+#endif
 
 	return 0;
 }
