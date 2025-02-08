@@ -6,10 +6,6 @@ project(btree)
 message(STATUS Using ${CMAKE_C_COMPILER})
 message(STATUS Using ${CMAKE_CXX_COMPILER})
 
-add_compile_definitions(
-	BT_DEBUG
-)
-
 ## Add BTree library
 add_library(btree STATIC 
 	src/btmanager.cpp

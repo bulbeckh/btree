@@ -29,8 +29,6 @@ NodeExecutionResult retfai(MCInstance* b) {
 int main(int argc, char** argv)
 {
 
-	MCInstance g;
-
 	/* Construction of the following bt
 
 	- SequenceNode (sa)
@@ -87,7 +85,7 @@ int main(int argc, char** argv)
 	*/
 
 	// Init
-	BTManager manager(&g, &sa);
+	BTManager manager(&sa);
 
 	manager.run();
 
