@@ -1,7 +1,9 @@
 
 #include "bt.h"
 
-#include <iostream>
+#ifdef BT_DEGUG
+	#include <iostream>
+#endif
 
 // NOTE Use a namespace here for these global variables
 #define LEAF(name, func) LeafNode name(func)
